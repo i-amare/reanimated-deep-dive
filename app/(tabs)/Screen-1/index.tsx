@@ -9,11 +9,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-const AnimatedBlock3 = Animated.createAnimatedComponent(
-  forwardRef(({ width, height, onPress }: Block3Props, ref) => (
-    <Block3 width={width} height={height} onPress={onPress} ref={ref} />
-  )),
-);
+// const AnimatedBlock3 = Animated.createAnimatedComponent(
+//   forwardRef(({ width, height, onPress }: Block3Props, ref) => (
+//     <Block3 width={width} height={height} onPress={onPress} ref={ref} />
+//   )),
+// );
 
 export default function Screen1() {
   const width = useSharedValue(50);
@@ -33,7 +33,7 @@ export default function Screen1() {
     <View className='h-screen w-full flex-1 items-center justify-evenly bg-gray-950'>
       <Block1 />
       <Block2 />
-      <AnimatedBlock3 width={width} height={height} onPress={onBlock3Press} />
+      {/* <AnimatedBlock3 width={width} height={height} onPress={onBlock3Press} /> */}
     </View>
   );
 }
@@ -84,25 +84,25 @@ function Block2() {
   );
 }
 
-interface Block3Props {
-  onPress: () => void;
-  width?: SharedValue<number>;
-  height?: SharedValue<number>;
-  ref: React.ForwardedRef<any>;
-}
+// interface Block3Props {
+//   onPress: () => void;
+//   width?: SharedValue<number>;
+//   height?: SharedValue<number>;
+//   ref: React.ForwardedRef<any>;
+// }
 
-function Block3({ width, height, ref, onPress }: Block3Props) {
-  const animatedStyle = useAnimatedStyle(() => ({
-    width: withSpring(width?.value || 50),
-    height: withSpring(height?.value || 50),
-  }));
+// function Block3({ width, height, ref, onPress }: Block3Props) {
+//   const animatedStyle = useAnimatedStyle(() => ({
+//     width: withSpring(width?.value || 50),
+//     height: withSpring(height?.value || 50),
+//   }));
 
-  return (
-    <Pressable onPress={onPress} ref={ref}>
-      <Animated.View
-        style={[animatedStyle]}
-        className='rounded-lg bg-pink-300'
-      ></Animated.View>
-    </Pressable>
-  );
-}
+//   return (
+//     <Pressable onPress={onPress} ref={ref}>
+//       <Animated.View
+//         style={[animatedStyle]}
+//         className='rounded-lg bg-pink-300'
+//       ></Animated.View>
+//     </Pressable>
+//   );
+// }
