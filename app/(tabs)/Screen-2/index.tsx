@@ -23,7 +23,7 @@ export default function Screen2() {
   const xTranslation = useSharedValue(0);
 
   return (
-    <View className='bg-grey-950 flex-1 items-center justify-evenly'>
+    <View className='flex-1 items-center justify-evenly bg-gray-950'>
       <Block1 xTranslation={xTranslation} />
       <Block2 xTranslation={xTranslation} />
       <Block3 xTranslation={xTranslation} />
