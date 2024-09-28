@@ -1,31 +1,36 @@
 import { useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, {
+  SharedValue,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 
+const BLOCK_TRANSLATION = 100;
+
 export default function Screen2() {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      xTranslation.value = xTranslation.value >= 0 ? -BLOCK_TRANSLATION : BLOCK_TRANSLATION;
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+
+  const xTranslation = useSharedValue(0);
+
   return (
     <View className='bg-grey-950 flex-1 items-center justify-evenly'>
-      <Block1 />
+      <Block1 xTranslation={xTranslation} />
     </View>
   );
 }
 
-function Block1() {
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (xTranslation.value >= 0) xTranslation.value = -100;
-      else xTranslation.value = 100;
-      console.log('triggered');
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+interface Block1Props {
+  xTranslation: SharedValue<number>;
+}
 
-  const xTranslation = useSharedValue(0);
-
+function Block1({xTranslation}: Block1Props) {
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: withSpring(xTranslation.value) }],
   }));
